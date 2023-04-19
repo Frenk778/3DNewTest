@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    private GameObject mainCamera;
+    [SerializeField] private GameObject mainCamera;
 
     private void Start()
     {

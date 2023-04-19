@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
             EnemyContoler enemy = other.GetComponent<EnemyContoler>();
             if (enemy != null)
             {
-                TakeDamage(enemy.damage);
+                TakeDamage(enemy.Damage);
             }
         }
     }

@@ -7,7 +7,7 @@ public class EnemyContoler : MonoBehaviour
     [SerializeField] private float attackRadius = 5f;   
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Slider healthBar;   
-    public int damage = 10;   
+    public int Damage = 10;   
     private Animator _animator;
     public Transform weapon;
     private Score scoreScript;
@@ -83,7 +83,7 @@ public class EnemyContoler : MonoBehaviour
             Player playerScript = player.GetComponent<Player>();
             if (playerScript != null)
             {
-                playerScript.TakeDamage(damage);
+                playerScript.TakeDamage(Damage);
             }
         }
     } 
@@ -93,7 +93,7 @@ public class EnemyContoler : MonoBehaviour
     {        
         if (collision.gameObject.CompareTag("Player"))
         {            
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Player>().TakeDamage(Damage);
             scoreScript.AddScore();
         }
     }
