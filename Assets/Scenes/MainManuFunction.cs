@@ -6,8 +6,6 @@ public class MainManuFunction : MonoBehaviour
     internal static float time;
     internal static int score;
 
-
-
     private bool cameraEnabled = true;
     private CursorLockMode savedCursorMode;
 

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public Text scoreText; // ссылка на текстовое поле    
-    private int score = 0; // текущее количество очков
-
+    public Text scoreText; 
+    private int score = 0; 
+    
     void Start()
     {
         scoreText.text = "Score: " + score;
@@ -13,8 +13,8 @@ public class Score : MonoBehaviour
 
     public void AddScore()
     {
-        score += 5; // увеличиваем количество очков на 5
-        UpdateScoreText(); // обновляем текстовое поле
+        score += 5; 
+        UpdateScoreText(); 
         MainManuFunction.score = score;
     }
 

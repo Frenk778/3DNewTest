@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowShoot1 : MonoBehaviour
 {
+    float range = 10000f;
     public GameObject ArrowPrefab;
     RaycastHit hit;
-    float range = 10000f;
     public Transform ArrowSpawnPosition;
-
-
     public GameObject HandArrow;
 
     void shoot()

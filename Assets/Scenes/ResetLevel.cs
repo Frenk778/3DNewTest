@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour
 {
-    public GameObject[] enemies; // Массив врагов
-    private int enemiesToKill = 15; // Количество врагов, которых нужно убить для открытия двери
+    public GameObject[] enemies; 
+    private int enemiesToKill = 15;
 
     void Update()
-    {
-        // Проверяем, сколько врагов осталось на уровне
+    {        
         int enemiesLeft = 0;
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -19,11 +18,10 @@ public class ResetLevel : MonoBehaviour
                 enemiesLeft++;
             }
         }
-
-        // Если нет оставшихся врагов, открываем дверь
+        
         if (enemiesLeft == enemiesToKill)
         {
-            ResetLevel1(); // Если нужное количество врагов мертво, вызываем метод открытия двери
+            ResetLevel1();
         }
     }
 

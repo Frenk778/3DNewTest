@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RunBihaviour : StateMachineBehaviour
-{
+{    
     NavMeshAgent agent;
     Transform player;
     float attackRange = 2;

@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
-{    
-    //[SerializeField]private SaveLoad _saveLoad;
+{        
     public Text timerText;
     private float startTime;
-    private bool isTimerRunning = true; // переменна€, указывающий, что таймер запущен
+    private bool isTimerRunning = true;
     
 
     void Start()
     {
-        startTime = Time.time;
-        //startTime = _saveLoad.ReadTimer();
+        startTime = Time.time;        
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
     }
 
@@ -22,17 +20,16 @@ public class Timer : MonoBehaviour
     {
         float elapsedTime = Time.time - startTime;
 
-        // ѕреобразуем врем€ в формат минут:секунды
+        
         string minutes = ((int)elapsedTime / 60).ToString("00");
         string seconds = (elapsedTime % 60).ToString("00");
-
-        // ќбновл€ем текст в UI с отображением времени        
+              
         timerText.text = "Timer: " + minutes + ":" + seconds;
     }
 
     public void StopTimer()
     {
-        isTimerRunning = false; // останавливаем таймер
+        isTimerRunning = false; 
         MainManuFunction.time = Time.time - startTime;
     }
 }

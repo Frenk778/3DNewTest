@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class DoorController3 : MonoBehaviour
 {
-    public GameObject door; // Ссылка на игровой объект двери
-    private Animator doorAnimator; // Ссылка на компонент аниматора двери
+    public GameObject door; 
+    private Animator doorAnimator; 
 
-    public GameObject[] enemies; // Массив врагов
-    private int enemiesToKill = 15; // Количество врагов, которых нужно убить для открытия двери
+    public GameObject[] enemies; 
+    private int enemiesToKill = 15; 
 
     void Start()
     {
-        doorAnimator = door.GetComponent<Animator>(); // Получаем компонент аниматора двери        
+        doorAnimator = door.GetComponent<Animator>();
     }
 
     void Update()
-    {
-        // Проверяем, сколько врагов осталось на уровне
+    {        
         int enemiesLeft = 0;
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -26,17 +25,16 @@ public class DoorController3 : MonoBehaviour
                 enemiesLeft++;
             }
         }
-
-        // Если нет оставшихся врагов, открываем дверь
+        
         if (enemiesLeft == enemiesToKill)
         {
-            OpenDoor(); // Если нужное количество врагов мертво, вызываем метод открытия двери
+            OpenDoor(); 
         }
     }
 
     void OpenDoor()
     {
-        doorAnimator.SetBool("isOpen", true); // Устанавливаем булевую переменную isOpen в true, чтобы проиграть анимацию открытия двери
-        doorAnimator.enabled = true; // Включаем компонент аниматора двери, если он отключен        
+        doorAnimator.SetBool("isOpen", true); 
+        doorAnimator.enabled = true;      
     }
 }

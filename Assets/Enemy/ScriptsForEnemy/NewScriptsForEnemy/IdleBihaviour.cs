@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IdleBihaviour : StateMachineBehaviour
@@ -24,11 +22,5 @@ public class IdleBihaviour : StateMachineBehaviour
         float distance = Vector3.Distance(animator.transform.position, player.position);
         if (distance < chaseRange)
             animator.SetBool("IsChasing", true);
-    }
-
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
+    }    
 }

@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyContoler : MonoBehaviour
 {
-    //что исправить(публичные методы с большой буквы,должны быть —ериалазфилд(12 строка)сделать весь блок переменных приватными)
-
-    public int health = 100;    //текущее здоровье врага.
-    public int damage = 10;   //урон, который может наносить враг.
-    private Animator _animator;   //компонент аниматора, который управл€ет анимацией персонажа.
-    public float attackRadius = 5f;   //радиус атаки врага.
-    public Transform weapon;   //объект, который используетс€ дл€ атаки.
-    public LayerMask playerLayer;   //слой, на котором наход€тс€ игроки.
-    public Slider healthBar;   //полоска здоровь€ врага.    
-    private Score scoreScript; // ссылка на скрипт очков
+    [SerializeField] private int health = 100;
+    [SerializeField] private float attackRadius = 5f;   
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private Slider healthBar;   
+    public int damage = 10;   
+    private Animator _animator;
+    public Transform weapon;
+    private Score scoreScript;
 
 
     void Start()
@@ -28,24 +24,23 @@ public class EnemyContoler : MonoBehaviour
         healthBar.value = health;
     }
 
-    public void TakeDamage(int damage)  //прин€ти€ урона
+    public void TakeDamage(int damage)  
     {
         health -= damage;
 
         if (health <= 0)
         {
             Die();
-            healthBar.gameObject.SetActive(false);            
+            healthBar.gameObject.SetActive(false);
         }
         else
-        {
-            // ѕри получении урона начинаем преследование геро€
+        {            
             _animator.SetBool("IsChasing", true);
         }
     }
 
 
-    void Die()   //смерть врага
+    void Die()
     {
         Player player = FindObjectOfType<Player>();
         if (player != null)
@@ -62,11 +57,11 @@ public class EnemyContoler : MonoBehaviour
             enemyCollider.enabled = false;
         }
 
-        Destroy(gameObject, 2); //найти другой метод дл€ удалени€ врага что бы не загружать систему(пул объектов(поискать))
+        Destroy(gameObject, 2);
         scoreScript.AddScore();
     }
 
-    void OnTriggerEnter(Collider other)   //прин€ти€ урона от стрелы
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Arrow"))
         {
@@ -74,7 +69,7 @@ public class EnemyContoler : MonoBehaviour
             if (arrow != null)
             {
                 TakeDamage(arrow.Damage);
-                Destroy(other.gameObject);   //найти другой способ (отключить и обратно вернуть в пул)
+                Destroy(other.gameObject);  
             }
         }
     }
@@ -95,11 +90,9 @@ public class EnemyContoler : MonoBehaviour
 
 
     private void OnCollisionEnter(Collision collision)
-    {
-        // ѕровер€ем, €вл€етс€ ли объект героем
+    {        
         if (collision.gameObject.CompareTag("Player"))
-        {
-            // ¬ызываем метод нанесени€ урона герою
+        {            
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             scoreScript.AddScore();
         }
