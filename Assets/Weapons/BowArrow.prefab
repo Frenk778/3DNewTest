@@ -98,4 +98,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {x: 0, y: 0, z: 0}
   Speed: 100
-  Damage: 100
+  Damage: 20

@@ -37,7 +37,13 @@ public class EnemyContoler : MonoBehaviour
             Die();
             healthBar.gameObject.SetActive(false);            
         }
+        else
+        {
+            // При получении урона начинаем преследование героя
+            _animator.SetBool("IsChasing", true);
+        }
     }
+
 
     void Die()   //смерть врага
     {
