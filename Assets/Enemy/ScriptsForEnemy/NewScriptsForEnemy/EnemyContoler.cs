@@ -68,7 +68,7 @@ public class EnemyContoler : MonoBehaviour
             Arrow arrow = other.GetComponent<Arrow>();
             if (arrow != null)
             {
-                TakeDamage(arrow.Damage);
+                TakeDamage(arrow._damage);
                 Destroy(other.gameObject);  
             }
         }

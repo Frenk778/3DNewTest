@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class DoorController2 : MonoBehaviour
 {
-    public GameObject door; 
-    private Animator doorAnimator; 
-
-    public GameObject[] enemies; 
-    private int enemiesToKill = 15; 
+    [SerializeField] public GameObject door; 
+    [SerializeField] public GameObject[] enemies;
+    [SerializeField] private int enemiesToKill = 15; 
+    private Animator doorAnimator;
 
     void Start()
     {

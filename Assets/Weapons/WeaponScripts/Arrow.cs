@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    [SerializeField]private float _speed = 100;
+    [SerializeField]public int _damage = 20;
     public Vector3 Target;
-    public float Speed = 100;
-    public int Damage = 20;
 
     private void Update()
     {
-        float step = Speed * Time.deltaTime;
+        float step = _speed * Time.deltaTime;
         if (Target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, Target, step);
@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour
         EnemyContoler enemy = collision.gameObject.GetComponent<EnemyContoler>();
         if (enemy != null)
         {
-            enemy.TakeDamage(Damage);
+            enemy.TakeDamage(_damage);
         }
 
         Destroy(gameObject);
