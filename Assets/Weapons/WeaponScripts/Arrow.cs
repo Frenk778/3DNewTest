@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [SerializeField]private float _speed = 100;
-    [SerializeField]public int _damage = 20;
+    [SerializeField]public int _damage = 50;
     public Vector3 Target;
 
     private void Update()
