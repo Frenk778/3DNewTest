@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    [SerializeField] private GameObject mainCamera;
+    [SerializeField] private Transform mainCameraTransform;
 
     private void Start()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        mainCameraTransform = Camera.main.transform;
     }
 
     private void LateUpdate()
     {
-        transform.LookAt(mainCamera.transform);
+        transform.LookAt(mainCameraTransform.transform);
     }
 }

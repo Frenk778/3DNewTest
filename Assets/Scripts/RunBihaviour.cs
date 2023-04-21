@@ -3,9 +3,9 @@ using UnityEngine.AI;
 
 public class RunBihaviour : StateMachineBehaviour
 {    
-    NavMeshAgent agent;
-    Transform player;
-    float attackRange = 2;
+    private NavMeshAgent agent;
+    private Transform player;
+    private float attackRange = 2;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -3,25 +3,27 @@ using UnityEngine.UI;
 
 public class EnemyContoler : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
-    [SerializeField] private float attackRadius = 5f;   
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private Slider healthBar;   
-    public int Damage = 10;   
-    private Animator _animator;
+    [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Score _scoreScript;
+    [SerializeField] private int _health = 100;
+    [SerializeField] private int _damage = 10;
+    private float attackRadius = 5f;
     public Transform weapon;
-    private Score scoreScript;
+    public Animator _animator;
 
+
+    public int Damage => _damage;
 
     private void Start()
-    {  
+    {
         _animator = GetComponent<Animator>();
-        scoreScript = FindObjectOfType<Score>();
+        _scoreScript = FindObjectOfType<Score>();
     }
 
     private void Update()
     {
-        healthBar.value = health;
+        _healthBar.value = _health;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,30 +33,30 @@ public class EnemyContoler : MonoBehaviour
             Arrow arrow = other.GetComponent<Arrow>();
             if (arrow != null)
             {
-                TakeDamage(arrow._damage);
-                Destroy(other.gameObject);  
+                TakeDamage(arrow.Damage);
+                Destroy(other.gameObject);
             }
         }
     }
 
-    public void TakeDamage(int damage)  
+    public void TakeDamage(int damage)
     {
-        health -= damage;
+        _health -= damage;
 
-        if (health <= 0)
+        if (_health <= 0)
         {
             Die();
-            healthBar.gameObject.SetActive(false);
+            _healthBar.gameObject.SetActive(false);
         }
         else
-        {            
+        {
             _animator.SetBool("IsChasing", true);
-        }        
+        }
     }
 
     public void Attack()
     {
-        Collider[] hitPlayers = Physics.OverlapSphere(weapon.position, attackRadius, playerLayer);
+        Collider[] hitPlayers = Physics.OverlapSphere(weapon.position, attackRadius, _playerLayer);
 
         foreach (Collider player in hitPlayers)
         {
@@ -64,7 +66,7 @@ public class EnemyContoler : MonoBehaviour
                 playerScript.TakeDamage(Damage);
             }
         }
-    } 
+    }
 
     private void Die()
     {
@@ -84,15 +86,15 @@ public class EnemyContoler : MonoBehaviour
         }
 
         Destroy(gameObject, 2);
-        scoreScript.AddScore();
+        _scoreScript.AddScore();
     }
 
     private void OnCollisionEnter(Collision collision)
-    {        
+    {
         if (collision.gameObject.CompareTag("Player"))
-        {            
+        {
             collision.gameObject.GetComponent<Player>().TakeDamage(Damage);
-            scoreScript.AddScore();
+            _scoreScript.AddScore();
         }
     }
 }

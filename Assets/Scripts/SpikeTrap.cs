@@ -6,6 +6,7 @@ public class SpikeTrap : MonoBehaviour
 {
     [SerializeField] private int _damageAmount = 10; 
     [SerializeField] private float _damageInterval = 0.0f;
+
     private bool canDamage = true;
 
     private void OnTriggerEnter(Collider other)

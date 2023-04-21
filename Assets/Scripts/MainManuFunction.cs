@@ -7,12 +7,7 @@ public class MainManuFunction : MonoBehaviour
     internal static int score;
 
     private bool cameraEnabled = true;
-    private CursorLockMode savedCursorMode;
-
-    public void Start()
-    {
-
-    }
+    private CursorLockMode savedCursorMode;    
 
     private void Update()
     {

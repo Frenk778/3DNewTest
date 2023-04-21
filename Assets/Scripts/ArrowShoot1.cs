@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class ArrowShoot1 : MonoBehaviour
 {
-    float range = 10000f;
-    public GameObject ArrowPrefab;
-    RaycastHit hit;
-    public Transform ArrowSpawnPosition;
-    public GameObject HandArrow;
+    [SerializeField] private Transform _arrowSpawnPosition;
+    [SerializeField] private Arrow _arrowPrefab;
+    [SerializeField] private GameObject _handArrow;
 
-    void shoot()
+    private float _range = 10000f;
+
+
+    void Shoot()
     {
-        HandArrow.gameObject.SetActive(false);
+        _handArrow.SetActive(false);
 
         Vector2 ScreenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
-        if (Physics.Raycast(ray, out hit, range))
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _range))
         {
-            GameObject ArrowInstantiate = GameObject.Instantiate(ArrowPrefab, ArrowSpawnPosition.transform.position, ArrowSpawnPosition.transform.rotation) as GameObject;
-            ArrowInstantiate.GetComponent<Arrow>().setTarget(hit.point);
-            Destroy(ArrowInstantiate, 3);
+            Arrow arrow = Instantiate(_arrowPrefab, _arrowSpawnPosition.transform.position, _arrowSpawnPosition.transform.rotation);
+            arrow.SetTarget(hit.point);
+            Destroy(arrow, 3);
         }
     }
 }

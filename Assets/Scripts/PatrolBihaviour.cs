@@ -4,11 +4,11 @@ using UnityEngine.AI;
 
 public class PatrolBihaviour : StateMachineBehaviour
 {
-    float timer;
-    List<Transform> points = new List<Transform>();
-    NavMeshAgent agent;
-    Transform player;
-    float chaseRange = 10;
+    private float timer;
+    private List<Transform> points = new List<Transform>();
+    private Transform player;
+    private float chaseRange = 10;
+    private NavMeshAgent agent;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

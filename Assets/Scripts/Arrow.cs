@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField]private float _speed = 100;
-    [SerializeField]public int _damage = 50;
-    public Vector3 Target;
+    [SerializeField] private float _speed = 100;
+    [SerializeField] private int _damage = 50;
+    [SerializeField] private Vector3 _target;
+
+    public int Damage => _damage;
 
     private void Update()
     {
         float step = _speed * Time.deltaTime;
 
-        if (Target != null)
+        if (_target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Target, step);
+            transform.position = Vector3.MoveTowards(transform.position, _target, step);
         }
     }
 
-    public void setTarget(Vector3 target)
+    public void SetTarget(Vector3 target)
     {
-        Target = target;
+        _target = target;
     }
 
     private void OnCollisionEnter(Collision collision)

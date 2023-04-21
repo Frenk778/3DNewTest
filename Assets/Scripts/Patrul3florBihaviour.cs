@@ -6,11 +6,11 @@ using UnityEngine.AI;
 
 public class Patrul3florBihaviour : StateMachineBehaviour
 {
-    float timer;
-    List<Transform> points = new List<Transform>();
-    NavMeshAgent agent;
-    Transform player;
-    float chaseRange = 10;
+    private float timer;
+    private List<Transform> points = new List<Transform>();
+    private NavMeshAgent agent;
+    private Transform player;
+    private float chaseRange = 10;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

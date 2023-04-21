@@ -6,28 +6,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int score = 0;
-    [SerializeField] private float restoreHealthInterval = 1.5f;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int _score = 0;
+    [SerializeField] private float _restoreHealthInterval = 1.5f;
+    [SerializeField] private int _maxHealth = 100;
     [SerializeField] private Slider _healthBar;
 
-    private bool isTakingDamage = false;
-    private float _lastDamageTime;
-    private bool isAlive = true;
-    private int currentHealth;
     private Animator _animator;
+    private float _lastDamageTime;
+    private int _currentHealth;
+    private bool isAlive = true;
+    private bool isTakingDamage = false;
 
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
         isAlive = true;
     }
 
     private void Update()
     {
-        _healthBar.value = currentHealth;
+        _healthBar.value = _currentHealth;
     }
 
 
@@ -50,11 +50,11 @@ public class Player : MonoBehaviour
             return;
         }
 
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        if (currentHealth < 0)
+        if (_currentHealth < 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
         }
 
         _lastDamageTime = Time.time;
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
             StartCoroutine(RestoreHealthCoroutine());
         }
 
-        if (currentHealth == 0)
+        if (_currentHealth == 0)
         {
             Die();
         }
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
 
     public void AddScore(int points)
     {
-        score += points;
+        _score += points;
     }
 
     IEnumerator RestoreHealthCoroutine()
@@ -103,14 +103,14 @@ public class Player : MonoBehaviour
 
         float elapsedTime = 0f;
 
-        while (currentHealth < maxHealth)
+        while (_currentHealth < _maxHealth)
         {
             yield return null;
             elapsedTime += Time.deltaTime;
 
-            if (elapsedTime >= restoreHealthInterval)
+            if (elapsedTime >= _restoreHealthInterval)
             {
-                currentHealth++;
+                _currentHealth++;
                 elapsedTime = 0f;
             }
         }

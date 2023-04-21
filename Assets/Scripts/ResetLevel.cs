@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour
 {
-    public GameObject[] enemies; 
-    private int enemiesToKill = 15;          
+    [SerializeField] private GameObject[] enemies; 
+    [SerializeField] private int enemiesToKill = 15;          
+
 
     private void Update()
     {        
@@ -27,7 +28,7 @@ public class ResetLevel : MonoBehaviour
 
     IEnumerator ResetLevelCoroutine()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(1);
     }    
 }

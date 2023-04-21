@@ -6,29 +6,23 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
-    [SerializeField] private GameObject[] enemies;
-    [SerializeField] private int enemiesToKill = 15;
-    private Animator doorAnimator;
-
-    public void Start()
-    {
-        doorAnimator = door.GetComponent<Animator>();
-    }
+    [SerializeField] private Animator _doorAnimator;
+    [SerializeField] private GameObject[] _enemies;
+    [SerializeField] private int _enemiesToKill = 15;
 
     private void Update()
     {
         int enemiesLeft = 0;
-        for (int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < _enemies.Length; i++)
         {
-            if (enemies[i] == null)
+            if (_enemies[i] == null)
             {
                 enemiesLeft++;
             }
         }
 
 
-        if (enemiesLeft == enemiesToKill)
+        if (enemiesLeft == _enemiesToKill)
         {
             OpenDoor();
         }
@@ -36,7 +30,7 @@ public class DoorController : MonoBehaviour
 
     private void OpenDoor()
     {
-        doorAnimator.SetBool("isOpen", true);
-        doorAnimator.enabled = true;
+        _doorAnimator.SetBool("isOpen", true);
+        _doorAnimator.enabled = true;
     }
 }

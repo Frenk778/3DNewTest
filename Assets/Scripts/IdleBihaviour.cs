@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class IdleBihaviour : StateMachineBehaviour
 {
-    float timer;
-    Transform player;
-    float chaseRange = 10;
+     private float timer;
+     private Transform player;
+     private float chaseRange = 10;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
