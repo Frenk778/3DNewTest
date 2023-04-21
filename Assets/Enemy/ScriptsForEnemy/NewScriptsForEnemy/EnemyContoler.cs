@@ -10,7 +10,7 @@ public class EnemyContoler : MonoBehaviour
     public int Damage = 10;   
     private Animator _animator;
     public Transform weapon;
-    private Score scoreScript;
+    private Score scoreScript;   
 
 
     void Start()
@@ -36,9 +36,8 @@ public class EnemyContoler : MonoBehaviour
         else
         {            
             _animator.SetBool("IsChasing", true);
-        }
+        }        
     }
-
 
     void Die()
     {
@@ -87,7 +86,6 @@ public class EnemyContoler : MonoBehaviour
             }
         }
     } 
-
 
     private void OnCollisionEnter(Collision collision)
     {        

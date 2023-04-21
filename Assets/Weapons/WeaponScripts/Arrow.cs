@@ -11,6 +11,7 @@ public class Arrow : MonoBehaviour
     private void Update()
     {
         float step = _speed * Time.deltaTime;
+
         if (Target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, Target, step);
