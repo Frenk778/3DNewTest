@@ -9,13 +9,12 @@ public class MainManuFunction : MonoBehaviour
     private bool cameraEnabled = true;
     private CursorLockMode savedCursorMode;
 
-    void Start()
+    public void Start()
     {
 
     }
 
-
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {

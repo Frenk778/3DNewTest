@@ -9,7 +9,7 @@ public class LookAtPlayer : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         transform.LookAt(mainCamera.transform);
     }

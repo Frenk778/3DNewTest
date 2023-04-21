@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class ResetLevel : MonoBehaviour
 {
     public GameObject[] enemies; 
-    private int enemiesToKill = 15;
+    private int enemiesToKill = 15;          
 
-    void Update()
+    private void Update()
     {        
         int enemiesLeft = 0;
         for (int i = 0; i < enemies.Length; i++)
@@ -20,13 +20,14 @@ public class ResetLevel : MonoBehaviour
         }
         
         if (enemiesLeft == enemiesToKill)
-        {
-            ResetLevel1();
+        {            
+            StartCoroutine(ResetLevelCoroutine());
         }
     }
 
-    void ResetLevel1()
+    IEnumerator ResetLevelCoroutine()
     {
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(1);
-    }
+    }    
 }

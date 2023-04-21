@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
         HandArrow.gameObject.SetActive(true);
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {

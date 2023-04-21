@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
-{ 
+{
     [SerializeField] private int score = 0;
     [SerializeField] private float restoreHealthInterval = 1.5f;
     [SerializeField] private int maxHealth = 100;
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private bool isAlive = true;
     private int currentHealth;
     private Animator _animator;
+
 
     private void Start()
     {
@@ -29,7 +30,8 @@ public class Player : MonoBehaviour
         _healthBar.value = currentHealth;
     }
 
-    void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
@@ -39,30 +41,6 @@ public class Player : MonoBehaviour
                 TakeDamage(enemy.Damage);
             }
         }
-    }
-
-    IEnumerator RestoreHealthCoroutine()
-    {
-        while (Time.time - _lastDamageTime < 5f)
-        {
-            yield return null;
-        }
-
-        float elapsedTime = 0f;
-
-        while (currentHealth < maxHealth)
-        {
-            yield return null;
-            elapsedTime += Time.deltaTime;
-
-            if (elapsedTime >= restoreHealthInterval)
-            {
-                currentHealth++;
-                elapsedTime = 0f;
-            }
-        }
-
-        isTakingDamage = false;
     }
 
     public void TakeDamage(int damage)
@@ -93,8 +71,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Die()
-    {        
+
+    private void Die()
+    {
         _animator.SetBool("IsDead", true);
 
         if (gameObject != null)
@@ -110,14 +89,38 @@ public class Player : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void AddScore(int points)
+    {
+        score += points;
+    }
+
+    IEnumerator RestoreHealthCoroutine()
+    {
+        while (Time.time - _lastDamageTime < 5f)
+        {
+            yield return null;
+        }
+
+        float elapsedTime = 0f;
+
+        while (currentHealth < maxHealth)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime >= restoreHealthInterval)
+            {
+                currentHealth++;
+                elapsedTime = 0f;
+            }
+        }
+
+        isTakingDamage = false;
+    }
+
     IEnumerator LoadMainMenuAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-    }
-
-    public void AddScore(int points)
-    {
-        score += points;
     }
 }

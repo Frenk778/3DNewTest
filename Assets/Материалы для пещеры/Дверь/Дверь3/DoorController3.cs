@@ -9,12 +9,12 @@ public class DoorController3 : MonoBehaviour
     [SerializeField] private int enemiesToKill = 15; 
     private Animator doorAnimator;
 
-    void Start()
+    public void Start()
     {
         doorAnimator = door.GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {        
         int enemiesLeft = 0;
         for (int i = 0; i < enemies.Length; i++)
@@ -31,7 +31,7 @@ public class DoorController3 : MonoBehaviour
         }
     }
 
-    void OpenDoor()
+    private void OpenDoor()
     {
         doorAnimator.SetBool("isOpen", true); 
         doorAnimator.enabled = true;      

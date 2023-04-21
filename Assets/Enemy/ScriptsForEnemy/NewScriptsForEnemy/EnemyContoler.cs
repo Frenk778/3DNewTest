@@ -10,11 +10,11 @@ public class EnemyContoler : MonoBehaviour
     public int Damage = 10;   
     private Animator _animator;
     public Transform weapon;
-    private Score scoreScript;   
+    private Score scoreScript;
 
 
-    void Start()
-    {
+    private void Start()
+    {  
         _animator = GetComponent<Animator>();
         scoreScript = FindObjectOfType<Score>();
     }
@@ -22,6 +22,19 @@ public class EnemyContoler : MonoBehaviour
     private void Update()
     {
         healthBar.value = health;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Arrow"))
+        {
+            Arrow arrow = other.GetComponent<Arrow>();
+            if (arrow != null)
+            {
+                TakeDamage(arrow._damage);
+                Destroy(other.gameObject);  
+            }
+        }
     }
 
     public void TakeDamage(int damage)  
@@ -39,7 +52,21 @@ public class EnemyContoler : MonoBehaviour
         }        
     }
 
-    void Die()
+    public void Attack()
+    {
+        Collider[] hitPlayers = Physics.OverlapSphere(weapon.position, attackRadius, playerLayer);
+
+        foreach (Collider player in hitPlayers)
+        {
+            Player playerScript = player.GetComponent<Player>();
+            if (playerScript != null)
+            {
+                playerScript.TakeDamage(Damage);
+            }
+        }
+    } 
+
+    private void Die()
     {
         Player player = FindObjectOfType<Player>();
         if (player != null)
@@ -59,33 +86,6 @@ public class EnemyContoler : MonoBehaviour
         Destroy(gameObject, 2);
         scoreScript.AddScore();
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Arrow"))
-        {
-            Arrow arrow = other.GetComponent<Arrow>();
-            if (arrow != null)
-            {
-                TakeDamage(arrow._damage);
-                Destroy(other.gameObject);  
-            }
-        }
-    }
-
-    public void Attack()
-    {
-        Collider[] hitPlayers = Physics.OverlapSphere(weapon.position, attackRadius, playerLayer);
-
-        foreach (Collider player in hitPlayers)
-        {
-            Player playerScript = player.GetComponent<Player>();
-            if (playerScript != null)
-            {
-                playerScript.TakeDamage(Damage);
-            }
-        }
-    } 
 
     private void OnCollisionEnter(Collision collision)
     {        

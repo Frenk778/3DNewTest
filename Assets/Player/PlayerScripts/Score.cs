@@ -6,7 +6,7 @@ public class Score : MonoBehaviour
     [SerializeField]private Text scoreText; 
     private int score = 0; 
     
-    void Start()
+    public void Start()
     {
         scoreText.text = "Score: " + score;
     }
@@ -18,7 +18,7 @@ public class Score : MonoBehaviour
         MainManuFunction.score = score;
     }
 
-    void UpdateScoreText()
+    public void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
     }
