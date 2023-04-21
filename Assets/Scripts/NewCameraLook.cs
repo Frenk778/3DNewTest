@@ -12,6 +12,8 @@ public class NewCameraLook : MonoBehaviour
     private Vector2 smoothMouse = Vector2.zero;
     private Vector2 mouseLook = Vector2.zero;
     private bool canRotate = false;
+    private float maxMouseLookValue = 80f;
+    private float minMouseLookValue = -80f;
 
     private void Start()
     {
@@ -44,7 +46,7 @@ public class NewCameraLook : MonoBehaviour
 
             mouseLook += smoothMouse;
 
-            mouseLook.y = Mathf.Clamp(mouseLook.y, -80f, 80f);
+            mouseLook.y = Mathf.Clamp(mouseLook.y, minMouseLookValue, maxMouseLookValue);
 
             transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
             player.localRotation = Quaternion.AngleAxis(mouseLook.x, player.up);
