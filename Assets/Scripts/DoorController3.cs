@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController3 : MonoBehaviour
+public class DoorController3 : MonoBehaviour 
 {
     [SerializeField] private Animator _doorAnimator;
     [SerializeField] private GameObject[] enemies;
