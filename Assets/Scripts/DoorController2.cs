@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorController2 : MonoBehaviour
 {
     [SerializeField] private Animator _doorAnimator;
-    [SerializeField] public GameObject[] enemies;
+    [SerializeField] private GameObject[] enemies;
     [SerializeField] private int enemiesToKill = 15;
 
     private void Update()
