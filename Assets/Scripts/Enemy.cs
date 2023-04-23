@@ -7,11 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Slider _healthBar;
     [SerializeField] private Score _scoreScript;
     [SerializeField] private Transform _weapon;
+    [SerializeField] private Animator _animator;
     [SerializeField] private int _health = 100;
     [SerializeField] private int _damage = 10;
 
     private float attackRadius = 5f;
-    public Animator _animator;
 
     public int Damage => _damage;
 

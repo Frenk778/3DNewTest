@@ -28,6 +28,7 @@ public class Arrow : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+
         if (enemy != null)
         {
             enemy.TakeDamage(_damage);

@@ -4,13 +4,13 @@ using UnityEngine.AI;
 
 public class PatrulBihaviourZombie : StateMachineBehaviour
 {
-    private float _timer;
     private List<Transform> _points = new List<Transform>();
     private Transform _player;
-    private float _chaseRange = 10;
     private NavMeshAgent _agent;
-    private int _nullIndex = 0;
+    private float _chaseRange = 10;
     private float _patrolTime = 10f;
+    private int _nullIndex = 0;
+    private float _timer;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
