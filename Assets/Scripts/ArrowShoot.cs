@@ -4,7 +4,7 @@ public class ArrowShoot : MonoBehaviour
 {
     [SerializeField] private Transform _arrowSpawnPosition;
     [SerializeField] private Arrow _arrowPrefab;
-    [SerializeField] private GameObject _handArrow;
+    [SerializeField] private Transform _handArrow;
 
     private int _destroyTime = 3;
     private float _range = 10000f;
@@ -12,7 +12,7 @@ public class ArrowShoot : MonoBehaviour
 
     private void Shoot()
     {
-        _handArrow.SetActive(false);
+        _handArrow.gameObject.SetActive(false);
 
         Vector2 ScreenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);

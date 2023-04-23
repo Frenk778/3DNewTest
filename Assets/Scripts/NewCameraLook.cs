@@ -16,6 +16,7 @@ public class NewCameraLook : MonoBehaviour
     private float _minMouseLookValue = -80f;
     private float _xRotationCamera = 0f;
     private float _zRotationCamera = 0f;
+    private const float _smoothingSpeed = 1f;
 
     private void Start()
     {
@@ -36,8 +37,8 @@ public class NewCameraLook : MonoBehaviour
             var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             mouseDelta = Vector2.Scale(mouseDelta, new Vector2(_sensitivity * _smoothing, _sensitivity * _smoothing));
 
-            smoothMouse.x = Mathf.Lerp(smoothMouse.x, mouseDelta.x, 1f / _smoothing);
-            smoothMouse.y = Mathf.Lerp(smoothMouse.y, mouseDelta.y, 1f / _smoothing);
+            smoothMouse.x = Mathf.Lerp(smoothMouse.x, mouseDelta.x, _smoothingSpeed / _smoothing);
+            smoothMouse.y = Mathf.Lerp(smoothMouse.y, mouseDelta.y, _smoothingSpeed / _smoothing);
 
             mouseLook += smoothMouse;
 

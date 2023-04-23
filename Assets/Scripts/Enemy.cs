@@ -6,11 +6,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private Slider _healthBar;
     [SerializeField] private Score _scoreScript;
+    [SerializeField] private Transform _weapon;
     [SerializeField] private int _health = 100;
     [SerializeField] private int _damage = 10;
 
     private float attackRadius = 5f;
-    public Transform weapon;
     public Animator _animator;
 
     public int Damage => _damage;
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Collider[] hitPlayers = Physics.OverlapSphere(weapon.position, attackRadius, _playerLayer);
+        Collider[] hitPlayers = Physics.OverlapSphere(_weapon.position, attackRadius, _playerLayer);
 
         foreach (Collider player in hitPlayers)
         {
@@ -68,14 +68,16 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         Player player = FindObjectOfType<Player>();
+
         if (player != null)
         {
             player.AddScore(5);
         }
-        
+
         _animator.SetTrigger("Death");
 
         Collider enemyCollider = GetComponent<Collider>();
+
         if (enemyCollider != null)
         {
             enemyCollider.enabled = false;
@@ -88,7 +90,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Player player = collision.gameObject.GetComponent<Player>();
-        if (player!=null)
+        if (player != null)
         {
             collision.gameObject.GetComponent<Player>().TakeDamage(Damage);
             _scoreScript.AddScore();

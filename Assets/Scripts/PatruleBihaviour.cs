@@ -4,45 +4,45 @@ using UnityEngine.AI;
 
 public class PatruleBihaviour : StateMachineBehaviour
 {
-    private List<Transform> points = new List<Transform>();
-    private Transform player;
-    private NavMeshAgent agent;
+    private List<Transform> _points = new List<Transform>();
+    private Transform _player;
+    private NavMeshAgent _agent;
     private float _patrolTime = 10f;
-    private float chaseRange = 10f;
+    private float _chaseRange = 10f;
     private int _nullIndex = 0;
-    private float timer;
+    private float _timer;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = _nullIndex;
+        _timer = _nullIndex;
         Transform pointsObject = GameObject.FindGameObjectWithTag("Points1").transform;
         foreach (Transform t in pointsObject)
-            points.Add(t);
+            _points.Add(t);
 
-        agent = animator.GetComponent<NavMeshAgent>();
-        agent.SetDestination(points[Random.Range(0, points.Count)].position);
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        _agent = animator.GetComponent<NavMeshAgent>();
+        _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (agent.remainingDistance <= agent.stoppingDistance)
-            agent.SetDestination(points[Random.Range(0, points.Count)].position);
+        if (_agent.remainingDistance <= _agent.stoppingDistance)
+            _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);
 
-        timer += Time.deltaTime;
-        if (timer > _patrolTime)
+        _timer += Time.deltaTime;
+        if (_timer > _patrolTime)
             animator.SetBool("IsPatrolling", false);
 
-        if (player != null)
+        if (_player != null)
         {
-            float distance = Vector3.Distance(animator.transform.position, player.position);
-            if (distance < chaseRange)
+            float distance = Vector3.Distance(animator.transform.position, _player.position);
+            if (distance < _chaseRange)
                 animator.SetBool("IsChasing", true);
         }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(agent.transform.position);
+        _agent.SetDestination(_agent.transform.position);
     }
 }
