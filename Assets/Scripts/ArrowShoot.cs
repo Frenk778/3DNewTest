@@ -22,6 +22,6 @@ public class ArrowShoot : MonoBehaviour
             Arrow arrow = Instantiate(_arrowPrefab, _arrowSpawnPosition.transform.position, _arrowSpawnPosition.transform.rotation);
             arrow.SetTarget(hit.point);
             Destroy(arrow, _destroyTime);            
-        }
+        }        
     }    
 }
