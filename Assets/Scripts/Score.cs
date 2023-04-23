@@ -3,23 +3,25 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField]private Text scoreText; 
-    private int score = 0; 
+    [SerializeField] private Text _scoreText; 
+
+    private int _score = 0; 
+    private int _addPoints = 5; 
     
     public void Start()
     {
-        scoreText.text = "Score: " + score;
+        _scoreText.text = "Score: " + _score;
     }
 
     public void AddScore()
     {
-        score += 5; 
+        _score += _addPoints; 
         UpdateScoreText(); 
-        MainManuFunction.score = score;
+        MainManuFunction.score = _score;
     }
 
     public void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score;
+        _scoreText.text = "Score: " + _score;
     }
 }

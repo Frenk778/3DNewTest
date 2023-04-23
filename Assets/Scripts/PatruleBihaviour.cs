@@ -1,19 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PatruleBihaviour : StateMachineBehaviour
 {
-    private float timer;
     private List<Transform> points = new List<Transform>();
-    private NavMeshAgent agent;
     private Transform player;
-    private float chaseRange = 10;
+    private NavMeshAgent agent;
+    private float _patrolTime = 10f;
+    private float chaseRange = 10f;
+    private int _nullIndex = 0;
+    private float timer;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = 0;
+        timer = _nullIndex;
         Transform pointsObject = GameObject.FindGameObjectWithTag("Points1").transform;
         foreach (Transform t in pointsObject)
             points.Add(t);
@@ -29,7 +30,7 @@ public class PatruleBihaviour : StateMachineBehaviour
             agent.SetDestination(points[Random.Range(0, points.Count)].position);
 
         timer += Time.deltaTime;
-        if (timer > 10)
+        if (timer > _patrolTime)
             animator.SetBool("IsPatrolling", false);
 
         if (player != null)

@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class SpikeTrap : MonoBehaviour
 {
-    [SerializeField] private int _damageAmount = 10; 
+    [SerializeField] private int _damageAmount = 10;
     [SerializeField] private float _damageInterval = 0.0f;
 
-    private bool canDamage = true;
+    private bool _canDamage = true;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Player player = other.GetComponent<Player>();
+        if (player != null && _canDamage)
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null && canDamage)
-            {
-                player.TakeDamage(_damageAmount);
-                StartCoroutine(DamageCooldown());
-            }
+            player.TakeDamage(_damageAmount);
+            StartCoroutine(DamageCooldown());
         }
     }
 
     IEnumerator DamageCooldown()
     {
-        canDamage = false;
+        _canDamage = false;
         yield return new WaitForSeconds(_damageInterval);
-        canDamage = true;
+        _canDamage = true;
     }
 }

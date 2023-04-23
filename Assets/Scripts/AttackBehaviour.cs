@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class AttackBehaviour : StateMachineBehaviour
 {
-    [SerializeField] private int _attackDistance = 3;
-    [SerializeField] private int _chasingDistace = 15;
-
-    private Transform _player;
+    private Transform _player;    
+    private int _attackDistance = 3;
+    private int _chasingDistace = 15;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+    {     
+        _player = GameObject.FindGameObjectWithTag("Player").transform;        
     }
+
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

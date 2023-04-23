@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,23 +5,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int _score = 0;
-    [SerializeField] private float _restoreHealthInterval = 1.5f;
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private Slider _healthBar;
 
+    private bool _isAlive = true;
+    private bool _isTakingDamage = false;
     private Animator _animator;
     private float _lastDamageTime;
     private int _currentHealth;
-    private bool isAlive = true;
-    private bool isTakingDamage = false;
+    private int _score = 0;
+    private int _minCurrentHealth=0;
+    private int _destroyPlayerTime = 5;
+    private float _loadMainMenuTime = 2f;    
+    private float _initialElapsedTime = 0f;    
+    private float _timeSinceLastDamage = 5f;    
+    private float _restoreHealthInterval = 1.5f;
 
 
     private void Start()
     {
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
-        isAlive = true;
+        _isAlive = true;
     }
 
     private void Update()
@@ -30,42 +34,39 @@ public class Player : MonoBehaviour
         _healthBar.value = _currentHealth;
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            EnemyContoler enemy = other.GetComponent<EnemyContoler>();
-            if (enemy != null)
-            {
-                TakeDamage(enemy.Damage);
-            }
+            TakeDamage(enemy.Damage);
         }
+
     }
 
     public void TakeDamage(int damage)
     {
-        if (!isAlive)
+        if (!_isAlive)
         {
             return;
         }
 
         _currentHealth -= damage;
 
-        if (_currentHealth < 0)
+        if (_currentHealth < _minCurrentHealth)
         {
-            _currentHealth = 0;
+            _currentHealth = _minCurrentHealth;
         }
 
         _lastDamageTime = Time.time;
 
-        if (!isTakingDamage)
+        if (!_isTakingDamage)
         {
-            isTakingDamage = true;
+            _isTakingDamage = true;
             StartCoroutine(RestoreHealthCoroutine());
         }
 
-        if (_currentHealth == 0)
+        if (_currentHealth == _minCurrentHealth)
         {
             Die();
         }
@@ -79,12 +80,10 @@ public class Player : MonoBehaviour
         if (gameObject != null)
         {
             _animator.SetTrigger("IsDead");
-            Destroy(gameObject, 5);
-        }
+            Destroy(gameObject, _destroyPlayerTime);
+        }        
 
-        AddScore(5);
-
-        StartCoroutine(LoadMainMenuAfterDelay(2f));
+        StartCoroutine(LoadMainMenuAfterDelay(_loadMainMenuTime));
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -96,12 +95,12 @@ public class Player : MonoBehaviour
 
     IEnumerator RestoreHealthCoroutine()
     {
-        while (Time.time - _lastDamageTime < 5f)
+        while (Time.time - _lastDamageTime < _timeSinceLastDamage)
         {
             yield return null;
         }
 
-        float elapsedTime = 0f;
+        float elapsedTime = _initialElapsedTime;
 
         while (_currentHealth < _maxHealth)
         {
@@ -111,11 +110,11 @@ public class Player : MonoBehaviour
             if (elapsedTime >= _restoreHealthInterval)
             {
                 _currentHealth++;
-                elapsedTime = 0f;
+                elapsedTime = _initialElapsedTime;
             }
         }
 
-        isTakingDamage = false;
+        _isTakingDamage = false;
     }
 
     IEnumerator LoadMainMenuAfterDelay(float delay)

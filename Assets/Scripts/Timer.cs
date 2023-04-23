@@ -5,31 +5,34 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private Text timerText;
-    private float startTime;
-    private bool isTimerRunning = true;
+    [SerializeField] private Text _timerText;
+
+    private float _startTime;
+    private bool _isTimerRunning = true;
+    private const int _secondsInMinute = 60;
+    private const string _twoDigitFormat = "00";
 
 
     public void Start()
     {
-        startTime = Time.time;
-        timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        _startTime = Time.time;
+        _timerText = GameObject.Find("TimerText").GetComponent<Text>();
     }
 
     private void Update()
     {
-        float elapsedTime = Time.time - startTime;
+        float elapsedTime = Time.time - _startTime;
 
 
-        string minutes = ((int)elapsedTime / 60).ToString("00");
-        string seconds = (elapsedTime % 60).ToString("00");
+        string minutes = ((int)elapsedTime / _secondsInMinute).ToString(_twoDigitFormat);
+        string seconds = (elapsedTime % _secondsInMinute).ToString(_twoDigitFormat);
 
-        timerText.text = "Timer: " + minutes + ":" + seconds;
+        _timerText.text = "Timer: " + minutes + ":" + seconds;
     }
 
     public void StopTimer()
     {
-        isTimerRunning = false;
-        MainManuFunction.time = Time.time - startTime;
+        _isTimerRunning = false;
+        MainManuFunction.time = Time.time - _startTime;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] private float _speed = 100;
+    [SerializeField] private float _speed = 100f;
     [SerializeField] private int _damage = 50;
     [SerializeField] private Vector3 _target;
 
@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        EnemyContoler enemy = collision.gameObject.GetComponent<EnemyContoler>();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(_damage);

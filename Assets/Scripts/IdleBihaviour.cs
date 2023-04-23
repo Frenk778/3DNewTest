@@ -2,25 +2,27 @@ using UnityEngine;
 
 public class IdleBihaviour : StateMachineBehaviour
 {
-     private float timer;
-     private Transform player;
-     private float chaseRange = 10;
+    private Transform _player;
+    private float _startValue = 0f;
+    private float _waitingTime = 2f;
+    private float _chaseRange = 10f;
+    private float _timer;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = 0;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        _timer = _startValue;
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer += Time.deltaTime;
-        if (timer > 2)
+        _timer += Time.deltaTime;
+        if (_timer > _waitingTime)
             animator.SetBool("IsPatrolling", true);
 
-        float distance = Vector3.Distance(animator.transform.position, player.position);
-        if (distance < chaseRange)
+        float distance = Vector3.Distance(animator.transform.position, _player.position);
+        if (distance < _chaseRange)
             animator.SetBool("IsChasing", true);
-    }    
+    }
 }

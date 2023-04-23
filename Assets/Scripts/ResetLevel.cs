@@ -5,22 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemies; 
-    [SerializeField] private int enemiesToKill = 15;          
+    [SerializeField] private GameObject[] _enemies; 
+    [SerializeField] private int _enemiesToKill = 15;          
 
 
     private void Update()
     {        
         int enemiesLeft = 0;
-        for (int i = 0; i < enemies.Length; i++)
+
+        for (int i = 0; i < _enemies.Length; i++)
         {
-            if (enemies[i] == null)
+            if (_enemies[i] == null)
             {
                 enemiesLeft++;
             }
         }
         
-        if (enemiesLeft == enemiesToKill)
+        if (enemiesLeft == _enemiesToKill)
         {            
             StartCoroutine(ResetLevelCoroutine());
         }
