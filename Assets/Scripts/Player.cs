@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
 
     private bool _isAlive = true;
     private bool _isTakingDamage = false;
-    private Animator _animator;
     private float _lastDamageTime;
     private int _currentHealth;
+    private Animator _animator;
     private int _score = 0;
     private int _minCurrentHealth=0;
     private int _destroyPlayerTime = 5;
