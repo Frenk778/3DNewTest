@@ -11,7 +11,7 @@ public class PatrulBihaviourCross : StateMachineBehaviour
     private float _patrolTime = 10f;
     private int _nullIndex = 0;
     private float _timer;
-        
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer = _nullIndex;

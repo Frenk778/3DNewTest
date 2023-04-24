@@ -30,8 +30,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Arrow arrow = other.GetComponent<Arrow>();
-        if (arrow != null)
+        if (other.TryGetComponent(out Arrow arrow))
         {
             TakeDamage(arrow.Damage);
             Destroy(other.gameObject);
@@ -51,7 +50,7 @@ public class Enemy : MonoBehaviour
         {
             _animator.SetBool("IsChasing", true);
         }
-    }  
+    }
 
 
     public void Attack()
@@ -60,8 +59,8 @@ public class Enemy : MonoBehaviour
 
         foreach (Collider player in hitPlayers)
         {
-            Player playerScript = player.GetComponent<Player>();
-            if (playerScript != null)
+            Player playerScript;
+            if (player.TryGetComponent(out playerScript))
             {
                 playerScript.TakeDamage(Damage);
             }
@@ -79,9 +78,8 @@ public class Enemy : MonoBehaviour
 
         _animator.SetTrigger("Death");
 
-        Collider enemyCollider = GetComponent<Collider>();
-
-        if (enemyCollider != null)
+        Collider enemyCollider;
+        if (TryGetComponent(out enemyCollider))
         {
             enemyCollider.enabled = false;
         }
@@ -91,11 +89,10 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        Player player = collision.gameObject.GetComponent<Player>();
-        if (player != null)
+    {        
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(Damage);
+            player.TakeDamage(Damage);
             _scoreScript.AddScore();
         }
     }

@@ -11,7 +11,7 @@ public class PatrolBihaviour : StateMachineBehaviour
     private float _patrolTime = 10f;
     private int _nullIndex = 0;
     private float _timer;
-    
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer = _nullIndex;
@@ -44,5 +44,5 @@ public class PatrolBihaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _agent.SetDestination(_agent.transform.position);
-    }
+    }    
 }

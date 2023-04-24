@@ -15,8 +15,8 @@ public class Timer : MonoBehaviour
 
     public void Start()
     {
-        _startTime = Time.time;
-        _timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        _startTime = Time.time;       
+        if (!GameObject.Find("TimerText").TryGetComponent(out _timerText)){}
     }
 
     private void Update()

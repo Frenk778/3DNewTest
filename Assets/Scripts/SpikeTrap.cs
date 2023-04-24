@@ -10,9 +10,7 @@ public class SpikeTrap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.GetComponent<Player>();
-
-        if (player != null && _canDamage)
+        if (other.TryGetComponent(out Player player) && _canDamage)
         {
             player.TakeDamage(_damageAmount);
             StartCoroutine(DamageCooldown());
