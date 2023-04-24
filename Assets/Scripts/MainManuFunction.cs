@@ -3,11 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class MainManuFunction : MonoBehaviour
 {
-    internal static float _time;
-    internal static int _score;
-
-    
-
+    private static float _time;
+    private static int _score;
     private bool _isCameraEnabled = true;
     private CursorLockMode _savedCursorMode;
 
@@ -42,5 +39,17 @@ public class MainManuFunction : MonoBehaviour
             _isCameraEnabled = Camera.main.GetComponent<NewCameraLook>().enabled;
             Camera.main.GetComponent<NewCameraLook>().enabled = false;
         }
+    }
+
+    public static float GameTime
+    {
+        get { return _time; }
+        set { _time = value; }
+    }
+
+    public static int Score
+    {
+        get { return _score; }
+        set { _score = value; }
     }
 }
