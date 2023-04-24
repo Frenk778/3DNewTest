@@ -3,11 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class MainManuFunction : MonoBehaviour
 {
-    internal static float time;
-    internal static int score;
+    internal static float _time;
+    internal static int _score;
+
+    
 
     private bool _isCameraEnabled = true;
-    private CursorLockMode _savedCursorMode;    
+    private CursorLockMode _savedCursorMode;
 
     private void Update()
     {

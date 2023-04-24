@@ -32,6 +32,6 @@ public class Timer : MonoBehaviour
     public void StopTimer()
     {
         _isTimerRunning = false;
-        MainManuFunction.time = Time.time - _startTime;
+        MainManuFunction._time = Time.time - _startTime;
     }
 }

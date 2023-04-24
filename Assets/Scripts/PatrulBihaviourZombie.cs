@@ -31,13 +31,13 @@ public class PatrulBihaviourZombie : StateMachineBehaviour
 
         _timer += Time.deltaTime;
         if (_timer > _patrolTime)
-            animator.SetBool("IsPatrolling", false);
+            animator.SetBool(Animator.StringToHash("IsPatrolling"), false);
 
         if (_player != null)
         {
             float distance = Vector3.Distance(animator.transform.position, _player.position);
             if (distance < _chaseRange)
-                animator.SetBool("IsChasing", true);
+                animator.SetBool(Animator.StringToHash("IsChasing"), true);
         }
     }
 

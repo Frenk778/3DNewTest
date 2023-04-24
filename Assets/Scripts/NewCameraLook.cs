@@ -11,7 +11,7 @@ public class NewCameraLook : MonoBehaviour
 
     private Vector2 smoothMouse = Vector2.zero;
     private Vector2 mouseLook = Vector2.zero;
-    private bool _isCanRotate = false;
+    private bool _canRotate = false;
     private float _zRotationCamera = 0f;
     private float _xRotationCamera = 0f;
     private float _maxMouseLookValue = 80f;
@@ -32,7 +32,7 @@ public class NewCameraLook : MonoBehaviour
 
     private void Update()
     {
-        if (_isCanRotate)
+        if (_canRotate)
         {
             var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             mouseDelta = Vector2.Scale(mouseDelta, new Vector2(_sensitivity * _smoothing, _sensitivity * _smoothing));
@@ -53,6 +53,6 @@ public class NewCameraLook : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
 
-        _isCanRotate = true;
+        _canRotate = true;
     }
 }

@@ -17,16 +17,15 @@ public class RunBihaviour : StateMachineBehaviour
         _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _agent.SetDestination(_player.position);
         float distance = Vector3.Distance(animator.transform.position, _player.position);
         if (distance < _attackRange)
-            animator.SetBool("IsAttack", true);
+            animator.SetBool(Animator.StringToHash("IsAttack"), true);
 
         if (distance > _chaseRange)
-            animator.SetBool("IsChasing", false);
+            animator.SetBool(Animator.StringToHash("IsChasing"), false);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

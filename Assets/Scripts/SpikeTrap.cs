@@ -19,7 +19,7 @@ public class SpikeTrap : MonoBehaviour
         }
     }
 
-    IEnumerator DamageCooldown()
+    private IEnumerator DamageCooldown()
     {
         _canDamage = false;
         yield return new WaitForSeconds(_damageInterval);

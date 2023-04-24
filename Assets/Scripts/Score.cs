@@ -17,7 +17,7 @@ public class Score : MonoBehaviour
     {
         _score += _addPoints; 
         UpdateScoreText(); 
-        MainManuFunction.score = _score;
+        MainManuFunction._score = _score;
     }
 
     public void UpdateScoreText()

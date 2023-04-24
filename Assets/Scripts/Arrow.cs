@@ -25,11 +25,10 @@ public class Arrow : MonoBehaviour
         _target = target;
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-
-        if (enemy != null)
+        if (collision.gameObject.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(_damage);
         }

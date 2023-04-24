@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LookAtPlayer : MonoBehaviour
+public class Observer : MonoBehaviour
 {
     private Transform _mainCameraTransform;
 
