@@ -7,7 +7,7 @@ public class PatrulBihaviourZombie : StateMachineBehaviour
     private List<Transform> _points = new List<Transform>();
     private Transform _player;
     private NavMeshAgent _agent;
-    private float _chaseRange = 10;
+    private float _chaseRange = 10f;
     private float _patrolTime = 10f;
     private int _nullIndex = 0;
     private float _timer;

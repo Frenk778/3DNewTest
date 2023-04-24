@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _enemies; 
+    [SerializeField] private Transform[] _enemies; 
     [SerializeField] private int _enemiesToKill = 15;          
 
 

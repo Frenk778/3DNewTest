@@ -23,7 +23,6 @@ public class Timer : MonoBehaviour
     {
         float elapsedTime = Time.time - _startTime;
 
-
         string minutes = ((int)elapsedTime / _secondsInMinute).ToString(_twoDigitFormat);
         string seconds = (elapsedTime % _secondsInMinute).ToString(_twoDigitFormat);
 

@@ -7,7 +7,7 @@ public class MainManuFunction : MonoBehaviour
     internal static int score;
 
     private bool _isCameraEnabled = true;
-    private CursorLockMode savedCursorMode;    
+    private CursorLockMode _savedCursorMode;    
 
     private void Update()
     {
@@ -27,14 +27,14 @@ public class MainManuFunction : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            Cursor.lockState = savedCursorMode;
+            Cursor.lockState = _savedCursorMode;
             Cursor.visible = false;
             Camera.main.GetComponent<NewCameraLook>().enabled = _isCameraEnabled;
         }
         else
         {
             Time.timeScale = 0;
-            savedCursorMode = Cursor.lockState;
+            _savedCursorMode = Cursor.lockState;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             _isCameraEnabled = Camera.main.GetComponent<NewCameraLook>().enabled;

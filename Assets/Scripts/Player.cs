@@ -14,11 +14,11 @@ public class Player : MonoBehaviour
     private int _currentHealth;
     private Animator _animator;
     private int _score = 0;
-    private int _minCurrentHealth=0;
+    private int _minCurrentHealth = 0;
     private int _destroyPlayerTime = 5;
-    private float _loadMainMenuTime = 2f;    
-    private float _initialElapsedTime = 0f;    
-    private float _timeSinceLastDamage = 5f;    
+    private float _loadMainMenuTime = 2f;
+    private float _initialElapsedTime = 0f;
+    private float _timeSinceLastDamage = 5f;
     private float _restoreHealthInterval = 1.5f;
 
 
@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
         {
             TakeDamage(enemy.Damage);
         }
-
     }
 
     public void TakeDamage(int damage)
@@ -81,7 +80,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetTrigger("IsDead");
             Destroy(gameObject, _destroyPlayerTime);
-        }        
+        }
 
         StartCoroutine(LoadMainMenuAfterDelay(_loadMainMenuTime));
         Cursor.lockState = CursorLockMode.None;

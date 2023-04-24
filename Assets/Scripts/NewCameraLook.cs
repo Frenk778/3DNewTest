@@ -12,10 +12,10 @@ public class NewCameraLook : MonoBehaviour
     private Vector2 smoothMouse = Vector2.zero;
     private Vector2 mouseLook = Vector2.zero;
     private bool _isCanRotate = false;
+    private float _zRotationCamera = 0f;
+    private float _xRotationCamera = 0f;
     private float _maxMouseLookValue = 80f;
     private float _minMouseLookValue = -80f;
-    private float _xRotationCamera = 0f;
-    private float _zRotationCamera = 0f;
     private const float _smoothingSpeed = 1f;
 
     private void Start()

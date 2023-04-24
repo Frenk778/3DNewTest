@@ -8,13 +8,14 @@ public class ArrowShoot : MonoBehaviour
 
     private int _destroyTime = 3;
     private float _range = 10000f;
+    private float _screenCenterValue = 2f;
 
 
     private void Shoot()
     {
         _handArrow.gameObject.SetActive(false);
 
-        Vector2 ScreenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector2 ScreenCenter = new Vector2(Screen.width / _screenCenterValue, Screen.height / _screenCenterValue);
         Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _range))

@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health = 100;
     [SerializeField] private int _damage = 10;
 
-    private float attackRadius = 5f;
+    private float _attackRadius = 5f;
 
     public int Damage => _damage;
 
@@ -49,11 +49,12 @@ public class Enemy : MonoBehaviour
         {
             _animator.SetBool("IsChasing", true);
         }
-    }
+    }  
+
 
     public void Attack()
     {
-        Collider[] hitPlayers = Physics.OverlapSphere(_weapon.position, attackRadius, _playerLayer);
+        Collider[] hitPlayers = Physics.OverlapSphere(_weapon.position, _attackRadius, _playerLayer);
 
         foreach (Collider player in hitPlayers)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Arrow")]
-    [SerializeField] private GameObject _handArrow;
+    [SerializeField] private Transform _handArrow;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _shiftSpeed = 4f;
 
