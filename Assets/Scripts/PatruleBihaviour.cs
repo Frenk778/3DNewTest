@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PatruleBihaviour : StateMachineBehaviour
-{
+{ 
     private List<Transform> _points = new List<Transform>();
     private Transform _player;
     private NavMeshAgent _agent;
@@ -20,8 +20,8 @@ public class PatruleBihaviour : StateMachineBehaviour
             _points.Add(t);
 
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);        
+        _player = FindObjectOfType<Player>().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

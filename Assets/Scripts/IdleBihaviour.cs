@@ -10,8 +10,8 @@ public class IdleBihaviour : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {       
-        _timer = _startValue;
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _timer = _startValue;        
+        _player = FindObjectOfType<Player>().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
