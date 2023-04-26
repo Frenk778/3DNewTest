@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health = 100;
     [SerializeField] private int _damage = 10;
 
+    private const int _zeroLive = 0;
+    private const int _scoreIncrement = 5;
+    private const float _destroyDelay = 2f;
+
     private float _attackRadius = 5f;
 
     public int Damage => _damage;
@@ -37,21 +41,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {        
+        if (collision.gameObject.TryGetComponent(out Player player))
+        {
+            player.TakeDamage(Damage);
+            _scoreScript.AddScore();
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         _health -= damage;
 
-        if (_health <= 0)
+        if (_health <= _zeroLive)
         {
             Die();
             _healthBar.gameObject.SetActive(false);
         }
         else
         {
-            _animator.SetBool("IsChasing", true);
+            _animator.SetBool(Animator.StringToHash("IsChasing"), true);
         }
     }
-
 
     public void Attack()
     {
@@ -60,6 +72,7 @@ public class Enemy : MonoBehaviour
         foreach (Collider player in hitPlayers)
         {
             Player playerScript;
+
             if (player.TryGetComponent(out playerScript))
             {
                 playerScript.TakeDamage(Damage);
@@ -69,11 +82,11 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Player player = FindObjectOfType<Player>();
+        Player player = FindObjectOfType<Player>();        
 
         if (player != null)
         {
-            player.AddScore(5);
+            player.AddScore(_scoreIncrement);
         }
 
         _animator.SetTrigger("Death");
@@ -84,16 +97,7 @@ public class Enemy : MonoBehaviour
             enemyCollider.enabled = false;
         }
 
-        Destroy(gameObject, 2);
+        Destroy(gameObject, _destroyDelay);
         _scoreScript.AddScore();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {        
-        if (collision.gameObject.TryGetComponent(out Player player))
-        {
-            player.TakeDamage(Damage);
-            _scoreScript.AddScore();
-        }
     }
 }

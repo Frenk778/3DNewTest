@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RunBihaviour : StateMachineBehaviour
-{    
+{
     private NavMeshAgent _agent;
     private Transform _player;
     private float _runSpeed = 5f;
@@ -13,7 +13,7 @@ public class RunBihaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.speed = _runSpeed;        
+        _agent.speed = _runSpeed;
         _player = FindObjectOfType<Player>().transform;
     }
 

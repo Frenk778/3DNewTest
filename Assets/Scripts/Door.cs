@@ -19,7 +19,6 @@ public class Door : MonoBehaviour
             }
         }
 
-
         if (enemiesLeft == _enemiesToKill)
         {
             OpenDoor();
@@ -28,7 +27,7 @@ public class Door : MonoBehaviour
 
     private void OpenDoor()
     {
-        _doorAnimator.SetBool("isOpen", true);
+        _doorAnimator.SetBool(Animator.StringToHash("isOpen"), true);
         _doorAnimator.enabled = true;
     }
 }

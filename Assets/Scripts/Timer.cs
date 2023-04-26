@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +10,10 @@ public class Timer : MonoBehaviour
     private const int _secondsInMinute = 60;
     private const string _twoDigitFormat = "00";
 
-
     public void Start()
     {
-        _startTime = Time.time;       
-        if (!GameObject.Find("TimerText").TryGetComponent(out _timerText)){}
+        _startTime = Time.time;
+        _timerText = GameObject.Find("TimerText").GetComponent<Text>();
     }
 
     private void Update()
@@ -32,6 +29,6 @@ public class Timer : MonoBehaviour
     public void StopTimer()
     {
         _isTimerRunning = false;
-        MainManuFunction.GameTime = Time.time - _startTime;
+        MainMenuManager.GameTime = Time.time - _startTime;
     }
 }

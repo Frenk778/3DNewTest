@@ -4,12 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour
 {
-    [SerializeField] private Transform[] _enemies; 
-    [SerializeField] private int _enemiesToKill = 15;          
+    [SerializeField] private Transform[] _enemies;
+    [SerializeField] private int _enemiesToKill = 15;
+
+    private float _waitTime = 1f;
 
 
     private void Update()
-    {        
+    {
         int enemiesLeft = 0;
 
         for (int i = 0; i < _enemies.Length; i++)
@@ -19,16 +21,16 @@ public class ResetLevel : MonoBehaviour
                 enemiesLeft++;
             }
         }
-        
+
         if (enemiesLeft == _enemiesToKill)
-        {            
+        {
             StartCoroutine(ResetLevelCoroutine());
         }
     }
 
-    IEnumerator ResetLevelCoroutine()
+    private IEnumerator ResetLevelCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_waitTime);
         SceneManager.LoadScene(1);
-    }    
+    }
 }

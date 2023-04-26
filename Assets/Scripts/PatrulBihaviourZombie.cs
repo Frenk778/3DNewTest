@@ -20,14 +20,14 @@ public class PatrulBihaviourZombie : StateMachineBehaviour
             _points.Add(t);
 
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);        
+        _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position);        
         _player = FindObjectOfType<Player>().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (_agent.remainingDistance <= _agent.stoppingDistance)
-            _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);
+            _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position);
 
         _timer += Time.deltaTime;
         if (_timer > _patrolTime)

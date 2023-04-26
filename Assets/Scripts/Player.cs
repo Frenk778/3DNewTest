@@ -70,10 +70,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddScore(int points)
+    {
+        _score += points;
+    }
 
     private void Die()
     {
-        _animator.SetBool("IsDead", true);
+        _animator.SetBool(Animator.StringToHash("IsDead"), true);
 
         if (gameObject != null)
         {
@@ -86,12 +90,7 @@ public class Player : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void AddScore(int points)
-    {
-        _score += points;
-    }
-
-    IEnumerator RestoreHealthCoroutine()
+    private IEnumerator RestoreHealthCoroutine()
     {
         while (Time.time - _lastDamageTime < _timeSinceLastDamage)
         {
@@ -115,7 +114,7 @@ public class Player : MonoBehaviour
         _isTakingDamage = false;
     }
 
-    IEnumerator LoadMainMenuAfterDelay(float delay)
+    private IEnumerator LoadMainMenuAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");

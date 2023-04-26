@@ -26,21 +26,21 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            _animator.SetBool("IsAttack", true);
+            _animator.SetBool(Animator.StringToHash("IsAttack"), true);
         }
         else
         {
-            _animator.SetBool("IsAttack", false);
+            _animator.SetBool(Animator.StringToHash("IsAttack"), false);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);
-            _animator.SetBool("IsWalk", true);
+            _animator.SetBool(Animator.StringToHash("IsWalk"), true);
         }
         else
         {
-            _animator.SetBool("IsWalk", false);
+            _animator.SetBool(Animator.StringToHash("IsWalk"), false);
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -48,46 +48,46 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 transform.Translate(Vector3.forward * _moveSpeed * _shiftSpeed * Time.deltaTime);
-                _animator.SetBool("IsRun", true);
+                _animator.SetBool(Animator.StringToHash("IsRun"), true);
             }
             else
             {
-                _animator.SetBool("IsRun", false);
+                _animator.SetBool(Animator.StringToHash("IsRun"), false);
             }
         }
         else
         {
-            _animator.SetBool("IsRun", false);
+            _animator.SetBool(Animator.StringToHash("IsRun"), false);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(-Vector3.forward * _moveSpeed * Time.deltaTime);
-            _animator.SetBool("IsBack", true);
+            _animator.SetBool(Animator.StringToHash("IsBack"), true);
         }
         else
         {
-            _animator.SetBool("IsBack", false);
+            _animator.SetBool(Animator.StringToHash("IsBack"), false);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * _moveSpeed * Time.deltaTime);
-            _animator.SetBool("IsLeft", true);
+            _animator.SetBool(Animator.StringToHash("IsLeft"), true);
         }
         else
         {
-            _animator.SetBool("IsLeft", false);
+            _animator.SetBool(Animator.StringToHash("IsLeft"), false);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector3.right * _moveSpeed * Time.deltaTime);
-            _animator.SetBool("IsRight", true);
+            _animator.SetBool(Animator.StringToHash("IsRight"), true);
         }
         else
         {
-            _animator.SetBool("IsRight", false);
+            _animator.SetBool(Animator.StringToHash("IsRight"), false);
         }
     }
 }  

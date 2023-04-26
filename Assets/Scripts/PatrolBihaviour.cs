@@ -20,7 +20,7 @@ public class PatrolBihaviour : StateMachineBehaviour
             _points.Add(t);
 
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.SetDestination(_points[Random.Range(0, _points.Count)].position);        
+        _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position);        
         _player = FindObjectOfType<Player>().transform;
     }
 

@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainManuFunction : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
     private CursorLockMode _savedCursorMode;
     private bool _isCameraEnabled = true;
     private static float _time;
     private static int _score;
+    private NewCameraLook cameraLook;
 
     private void Update()
     {
@@ -28,7 +29,10 @@ public class MainManuFunction : MonoBehaviour
             Time.timeScale = 1;
             Cursor.lockState = _savedCursorMode;
             Cursor.visible = false;
-            Camera.main.GetComponent<NewCameraLook>().enabled = _isCameraEnabled;
+            if (cameraLook != null)
+            {
+                cameraLook.enabled = _isCameraEnabled;
+            }
         }
         else
         {
@@ -36,8 +40,11 @@ public class MainManuFunction : MonoBehaviour
             _savedCursorMode = Cursor.lockState;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            _isCameraEnabled = Camera.main.GetComponent<NewCameraLook>().enabled;
-            Camera.main.GetComponent<NewCameraLook>().enabled = false;
+            if (cameraLook != null)
+            {
+                _isCameraEnabled = cameraLook.enabled;
+                cameraLook.enabled = false;
+            }
         }
     }
 

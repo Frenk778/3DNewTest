@@ -20,12 +20,6 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    public void SetTarget(Vector3 target)
-    {
-        _target = target;
-    }
-
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Enemy enemy))
@@ -34,5 +28,10 @@ public class Arrow : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetTarget(Vector3 target)
+    {
+        _target = target;
     }
 }
