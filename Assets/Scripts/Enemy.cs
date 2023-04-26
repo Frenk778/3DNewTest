@@ -5,6 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
+    private const int ZeroLive = 0;    
+    private const float DestroyDelay = 2f;
+
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private Slider _healthBar;
     [SerializeField] private Score _scoreScript;
@@ -13,9 +16,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health = 100;
     [SerializeField] private int _damage = 10;
 
-    private const int _zeroLive = 0;
-    private const int _scoreIncrement = 5;
-    private const float _destroyDelay = 2f;
 
     private float _attackRadius = 5f;
 
@@ -24,17 +24,13 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        Score scoreScript = EnemyCoordinator.Instance.GetScoreScript();
+        Score scoreScript = EnemyController.Instance.GetScoreScript();
         if (scoreScript != null)
         {
             _scoreScript = scoreScript;
         }
     }
 
-    private void Update()
-    {
-        _healthBar.value = _health;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -58,7 +54,7 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
 
-        if (_health <= _zeroLive)
+        if (_health <= ZeroLive)
         {
             Die();
             _healthBar.gameObject.SetActive(false);
@@ -66,6 +62,7 @@ public class Enemy : MonoBehaviour
         else
         {
             _animator.SetBool(Animator.StringToHash("IsChasing"), true);
+            FixedUpdate();
         }
     }
 
@@ -84,16 +81,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (_healthBar.value != _health)
+        {
+            _healthBar.value = _health;
+        }
+    }
+
+
     private void Die()
     {
-        Player player = EnemyCoordinator.Instance.GetPlayer();
-
-        if (player != null)
-        {
-            player.AddScore(_scoreIncrement);
-        }
-
-        _animator.SetTrigger("Death");
+        _animator.SetTrigger(Animator.StringToHash("Death"));
 
         Collider enemyCollider;
 
@@ -102,7 +101,7 @@ public class Enemy : MonoBehaviour
             enemyCollider.enabled = false;
         }
 
-        Destroy(gameObject, _destroyDelay);
-        _scoreScript.AddScore();
-    }
+        Destroy(gameObject, DestroyDelay);
+        EnemyController.Instance.GetScoreScript().AddScore();
+    }    
 }

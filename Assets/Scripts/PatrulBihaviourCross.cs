@@ -15,12 +15,12 @@ public class PatrulBihaviourCross : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer = _nullIndex;
-        _points.AddRange(EnemyCoordinator.Instance.PointsObjectTwo.GetComponentsInChildren<Transform>());
-        _points.Remove(EnemyCoordinator.Instance.PointsObjectTwo);
+        _points.AddRange(EnemyController.Instance.PointsObjectTwo.GetComponentsInChildren<Transform>());
+        _points.Remove(EnemyController.Instance.PointsObjectTwo);
 
         _agent = animator.GetComponent<NavMeshAgent>();
         _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position);       
-        _player = EnemyCoordinator.Instance.GetPlayer().transform;
+        _player = EnemyController.Instance.GetPlayer().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

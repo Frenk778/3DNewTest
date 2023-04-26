@@ -11,7 +11,7 @@ public class IdleBihaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {       
         _timer = _startValue;        
-        _player = EnemyCoordinator.Instance.GetPlayerTransform();
+        _player = EnemyController.Instance.GetPlayerTransform();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

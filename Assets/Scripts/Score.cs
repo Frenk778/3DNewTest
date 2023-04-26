@@ -16,8 +16,7 @@ public class Score : MonoBehaviour
     public void AddScore()
     {
         _score += _addPoints; 
-        UpdateScoreText();
-        MainMenuLoader.Score = _score;
+        UpdateScoreText();        
     }
 
     public void UpdateScoreText()

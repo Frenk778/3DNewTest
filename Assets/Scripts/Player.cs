@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 
         if (gameObject != null)
         {
-            _animator.SetTrigger("IsDead");
+            _animator.SetTrigger(Animator.StringToHash("IsDead"));
             Destroy(gameObject, _destroyPlayerTime);
         }
 
