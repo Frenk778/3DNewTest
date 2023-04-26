@@ -8,11 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private Slider _healthBar;
 
-    private bool _isAlive = true;
+    private Animator _animator;
+    private static Player _instance;
     private bool _isTakingDamage = false;
     private float _lastDamageTime;
+    private bool _isAlive = true;
     private int _currentHealth;
-    private Animator _animator;
     private int _score = 0;
     private int _minCurrentHealth = 0;
     private int _destroyPlayerTime = 5;
@@ -21,9 +22,23 @@ public class Player : MonoBehaviour
     private float _timeSinceLastDamage = 5f;
     private float _restoreHealthInterval = 1.5f;
 
+    public static Player Instance => _instance;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
 
     private void Start()
-    {
+    {    
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
         _isAlive = true;

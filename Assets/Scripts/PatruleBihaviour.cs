@@ -10,18 +10,17 @@ public class PatruleBihaviour : StateMachineBehaviour
     private float _patrolTime = 10f;
     private float _chaseRange = 10f;
     private int _nullIndex = 0;
-    private float _timer;    
+    private float _timer;   
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer = _nullIndex;
-        Transform pointsObject = GameObject.FindGameObjectWithTag("Points1").transform;
-        foreach (Transform t in pointsObject)
-            _points.Add(t);
+        _points.AddRange(EnemyCoordinator.Instance.PointsObjectOne.GetComponentsInChildren<Transform>());
+        _points.Remove(EnemyCoordinator.Instance.PointsObjectOne);        
 
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position);        
-        _player = FindObjectOfType<Player>().transform;
+        _agent.SetDestination(_points[Random.Range(_nullIndex, _points.Count)].position); 
+        _player = EnemyCoordinator.Instance.GetPlayer().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

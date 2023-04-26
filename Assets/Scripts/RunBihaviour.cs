@@ -13,8 +13,8 @@ public class RunBihaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _agent = animator.GetComponent<NavMeshAgent>();
-        _agent.speed = _runSpeed;
-        _player = FindObjectOfType<Player>().transform;
+        _agent.speed = _runSpeed;        
+        _player = EnemyCoordinator.Instance.GetPlayer().transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

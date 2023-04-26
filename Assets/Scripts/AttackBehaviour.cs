@@ -7,8 +7,8 @@ public class AttackBehaviour : StateMachineBehaviour
     private int _chasingDistace = 15;       
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {               
-        _player = FindObjectOfType<Player>().transform;
+    {
+        _player = EnemyCoordinator.Instance.GetPlayer().transform;        
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

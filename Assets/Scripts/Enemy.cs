@@ -24,7 +24,11 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _scoreScript = FindObjectOfType<Score>();
+        Score scoreScript = EnemyCoordinator.Instance.GetScoreScript();
+        if (scoreScript != null)
+        {
+            _scoreScript = scoreScript;
+        }
     }
 
     private void Update()
@@ -42,7 +46,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {        
+    {
         if (collision.gameObject.TryGetComponent(out Player player))
         {
             player.TakeDamage(Damage);
@@ -82,7 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Player player = FindObjectOfType<Player>();        
+        Player player = EnemyCoordinator.Instance.GetPlayer();
 
         if (player != null)
         {
@@ -92,6 +96,7 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Death");
 
         Collider enemyCollider;
+
         if (TryGetComponent(out enemyCollider))
         {
             enemyCollider.enabled = false;

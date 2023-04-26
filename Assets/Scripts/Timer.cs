@@ -12,8 +12,7 @@ public class Timer : MonoBehaviour
 
     public void Start()
     {
-        _startTime = Time.time;
-        _timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        _startTime = Time.time;       
     }
 
     private void Update()
@@ -29,6 +28,6 @@ public class Timer : MonoBehaviour
     public void StopTimer()
     {
         _isTimerRunning = false;
-        MainMenuManager.GameTime = Time.time - _startTime;
+        MainMenuLoader.GameTime = Time.time - _startTime;
     }
 }
