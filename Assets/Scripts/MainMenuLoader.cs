@@ -2,11 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuLoader : MonoBehaviour
-{
-
-    /// <summary>
-    /// останавливает время,загружает сцену,останавливает поварачивание камеры,
-    /// </summary>
+{        
     private CursorLockMode _savedCursorMode;
     private bool _isCameraEnabled = true;
     private static float _time;
