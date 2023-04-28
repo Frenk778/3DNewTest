@@ -5,8 +5,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private Text _timerText;
 
-    private float _startTime;
-    private bool _isTimerRunning = true;
+    private float _startTime;    
     private const int _secondsInMinute = 60;
     private const string _twoDigitFormat = "00";
 
@@ -23,11 +22,5 @@ public class Timer : MonoBehaviour
         string seconds = (elapsedTime % _secondsInMinute).ToString(_twoDigitFormat);
 
         _timerText.text = "Timer: " + minutes + ":" + seconds;
-    }
-
-    public void StopTimer()
-    {
-        _isTimerRunning = false;
-        MainMenuLoader.GameTime = Time.time - _startTime;
-    }
+    }    
 }
