@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Door : MonoBehaviour
 {
     [SerializeField] private Animator _doorAnimator;

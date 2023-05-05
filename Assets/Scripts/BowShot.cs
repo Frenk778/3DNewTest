@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BowShot : MonoBehaviour
@@ -10,7 +11,6 @@ public class BowShot : MonoBehaviour
     private float _range = 10000f;
     private float _screenCenterValue = 2f;
 
-
     private void Shoot()
     {
         _handArrow.gameObject.SetActive(false);
@@ -22,7 +22,13 @@ public class BowShot : MonoBehaviour
         {
             Arrow arrow = Instantiate(_arrowPrefab, _arrowSpawnPosition.transform.position, _arrowSpawnPosition.transform.rotation);
             arrow.SetTarget(hit.point);
-            Destroy(arrow, _destroyTime);            
+            StartCoroutine(DestroyArrow(arrow.gameObject));
         }        
-    }    
+    }
+
+    private IEnumerator DestroyArrow(GameObject arrow)
+    {
+        yield return new WaitForSeconds(_destroyTime);
+        Destroy(arrow);
+    }
 }

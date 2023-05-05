@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
-    private const int ZeroLive = 0;    
+    private const int ZeroLive = 0;
     private const float DestroyDelay = 2f;
 
     [SerializeField] private LayerMask _playerLayer;
@@ -103,5 +103,5 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject, DestroyDelay);
         EnemyController.Instance.GetScoreScript().AddScore();
-    }    
+    }
 }

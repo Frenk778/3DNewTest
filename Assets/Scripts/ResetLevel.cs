@@ -31,6 +31,6 @@ public class ResetLevel : MonoBehaviour
     private IEnumerator ResetLevelCoroutine()
     {
         yield return new WaitForSeconds(_waitTime);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);        
     }
 }
